@@ -4,6 +4,7 @@ import com.projectone.wishlist.entity.Wishlist;
 import com.projectone.wishlist.repository.WishlistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -26,8 +27,19 @@ public class WishlistService {
     }
 
     //this is my third business logic to delete any wishlist by its wishlist_id
-    public void deleteWishlistById(Long wishlistId){
+    public Wishlist deleteWishlistById(Long wishlistId){
         Wishlist wishlist= wishlistRepository.findById(wishlistId).get();
         wishlistRepository.delete(wishlist);
+        return wishlist;
+    }
+
+    //this is my forth business logic to update the wishlist item
+    public Wishlist updateWishlistById(Long wishlistId, Wishlist wishlistFromClient){
+       Wishlist wishlist = wishlistRepository.findById(wishlistId).get();
+       wishlist.setProductId(wishlistFromClient.getProductId());
+       wishlist.setUserId(wishlistFromClient.getUserId());
+       wishlist.setCategory(wishlistFromClient.getCategory());
+       wishlistRepository.save(wishlist);
+       return wishlist;
     }
 }

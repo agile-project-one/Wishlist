@@ -28,13 +28,11 @@ public class WishlistController {
     @PutMapping
     @RequestBody
     @PathVariable
-    @ReponseBody
+    @RequestParam
+    @ResponseBody
     @ResponseBody
 
 */
-
-
-
     @PostMapping("/add")
     public ResponseEntity<Wishlist> addToWishlist(@RequestBody Wishlist wishlist){
         Wishlist wishlistitem = wishlistService.addToWishlist(wishlist);
@@ -46,6 +44,21 @@ public class WishlistController {
     public ResponseEntity<List<Wishlist>> getAllWishlist(){
         List<Wishlist> wishlists = wishlistService.getAllWishlist();
         return ResponseEntity.ok(wishlists);
+    }
+
+    //http://localhost:9191/api/wishlist/{wishlistId}
+    //http://localhost:9191/api/wishlist/4
+
+    @DeleteMapping("/{wishlistId}")
+    public ResponseEntity<Wishlist> deleteWishlistById(@PathVariable("wishlistId") Long wishlistId){
+        Wishlist wishlist= wishlistService.deleteWishlistById(wishlistId);
+        return ResponseEntity.ok(wishlist);
+    }
+
+    @PutMapping("/{wishlistId}")
+    public ResponseEntity<Wishlist> updateWishlistById(@PathVariable("wishlistId") Long wishlistId, @RequestBody Wishlist wishlistFromClient){
+        Wishlist wishlist = wishlistService.updateWishlistById(wishlistId, wishlistFromClient);
+        return ResponseEntity.ok(wishlist);
     }
 
 }

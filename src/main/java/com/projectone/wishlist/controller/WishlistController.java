@@ -14,30 +14,11 @@ public class WishlistController {
 
     @Autowired
     private WishlistService wishlistService;
-/*
-    POST http://localhost:9191/api/wishlist/add   + body
-            *or
-    POST http://localhost:9191/api/wishlist  + body
-
-    GET  http://localhost:9191/api/wishlist
-
-    @DeleteMapping
-    @ExceptionHandler
-    @Mapping
-    @PutMapping
-    @RequestBody
-    @PathVariable
-    @RequestParam
-    @ResponseBody
-    @ResponseBody
-
-*/
 
     @PostMapping("/add")
     public ResponseEntity<Wishlist> addToWishlist(@RequestBody Wishlist wishlist){
         Wishlist wishlistitem = wishlistService.addToWishlist(wishlist);
          return ResponseEntity.ok(wishlistitem);  //200 status code
-//        return ResponseEntity.created(URI.create("wishlist added with Product Id "+wishlistitem.getProductId())).build();
     }
 
     @GetMapping
@@ -45,9 +26,6 @@ public class WishlistController {
         List<Wishlist> wishlists = wishlistService.getAllWishlist();
         return ResponseEntity.ok(wishlists);
     }
-
-    //http://localhost:9191/api/wishlist/{wishlistId}
-    //http://localhost:9191/api/wishlist/4
 
     @DeleteMapping("/{wishlistId}")
     public ResponseEntity<Wishlist> deleteWishlistById(@PathVariable("wishlistId") Long wishlistId){

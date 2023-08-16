@@ -1,4 +1,4 @@
-package com.projectone.wishlist.config;
+package com.projectone.wishlist.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
